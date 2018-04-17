@@ -1,40 +1,51 @@
 <template>
-  <v-card>
     <v-container fluid grid-list-md>
       <v-layout row wrap>
-        <v-flex
-          v-bind="{ [`xs${card.flex}`]: true }"
-          v-for="card in cards"
-          :key="card.title">
-            <v-card>
-              <v-container fill-height fluid>
-                <v-layout fill-height>
-                  <v-flex d-flex xs1 align-center align-content-center justify-center>
-                    <span class="rank">{{ card.rank }}</span>
-                  </v-flex>
-                  <v-flex xs1 align-center flexbox style="font-weight: bold;
-    font-size: small;">
-                    <div class="arrow up login-required access-required"
-                     data-event-action="upvote" role="button"
-                     aria-label="好評" tabindex="0"></div>
-                    <!--<div class="score dislikes" title="10321">10.3k</div>-->
-                    <div class="score unvoted" title="10322">10.3k</div>
-                    <!--<div class="score likes" title="10323">10.3k</div>-->
-                    <div class="arrow down login-required access-required"
-                     data-event-action="downvote" role="button"
-                     aria-label="負評" tabindex="0"></div>
-                  </v-flex>
-                  <v-flex xs11 align-end flexbox>
-                    <div class="headline gray--text text-xs-left" v-text="card.title"></div>
-                    <div class="gray--text text-xs-left" v-text="card.subtitle"></div>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card>
+        <v-flex xs8>
+          <v-card>
+            <v-flex
+              v-bind="{ [`xs${card.flex}`]: true }"
+              v-for="card in cards"
+              :key="card.title">
+                <v-card>
+                  <v-container fill-height fluid>
+                    <v-layout fill-height>
+                      <v-flex d-flex xs1 align-center align-content-center justify-center>
+                        <span class="rank">{{ card.rank }}</span>
+                      </v-flex>
+                      <v-flex xs1 align-center flexbox style="font-weight: bold;
+        font-size: small;">
+                        <div class="arrow up login-required access-required"
+                         data-event-action="upvote" role="button"
+                         aria-label="好評" tabindex="0"></div>
+                        <!--<div class="score dislikes" title="10321">10.3k</div>-->
+                        <div class="score unvoted" title="10322">10.3k</div>
+                        <!--<div class="score likes" title="10323">10.3k</div>-->
+                        <div class="arrow down login-required access-required"
+                         data-event-action="downvote" role="button"
+                         aria-label="負評" tabindex="0"></div>
+                      </v-flex>
+                      <v-flex xs11 align-end flexbox>
+                        <div class="headline gray--text text-xs-left" v-text="card.title"></div>
+                        <div class="gray--text text-xs-left" v-text="card.subtitle"></div>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-card>
+            </v-flex>
+          </v-card>
+        </v-flex>
+        <v-flex xs4>
+          <v-flex xs12>
+            <v-text-field placeholder="请输入关键字进行搜索" append-icon="search"
+            autofocus>
+            </v-text-field>
+          </v-flex>
+          <v-btn color="primary" block depressed outline to="/post/href">发表新链接</v-btn>
+          <v-btn color="success" block depressed outline to="/post/blog">发表新博客</v-btn>
         </v-flex>
       </v-layout>
     </v-container>
-  </v-card>
 </template>
 
 <script>
@@ -42,27 +53,16 @@ export default {
   name: 'Home',
   data() {
     return {
-      cards: [
-        {
-          title: 'tianjin',
-          subtitle: 'nankai',
-          flex: 8,
-          rank: 1,
-        },
-        {
-          title: 'beijing',
-          subtitle: 'haidian',
-          flex: 8,
-          rank: 2,
-        },
-        {
-          title: 'shanghai',
-          subtile: 'waitan',
-          flex: 8,
-          rank: 3,
-        },
-      ],
+      cards: [],
     };
+  },
+  created() {
+    const that = this;
+    this.$http.get('/static/data/blog.json', { type: 'json' }).then((response) => {
+      console.log(response.bodyText);
+      that.cards = eval(response.bodyText); // temp for test
+      console.log(that.cards);
+    });
   },
 };
 </script>

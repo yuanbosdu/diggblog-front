@@ -6,10 +6,12 @@ import Blog from '@/components/Blog';
 import Favorate from '@/components/Favorate';
 import Href from '@/components/Href';
 import Post from '@/components/Post';
+import Login from '@/components/Login';
 
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -17,34 +19,46 @@ export default new Router({
       component: Home,
     },
     {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+    },
+    {
       path: '/post',
-      name: 'Post',
       component: Post,
-      chirldren: [
+      children: [
+        {
+          path: '',
+          redirect: '/',
+        },
         {
           path: 'blog',
           name: 'Blog',
           component: Blog,
+          meta: { requiresAuth: true },
         },
         {
           path: 'href',
           name: 'Href',
           component: Href,
+          meta: { requiresAuth: true },
         },
       ],
     },
     {
       path: '/user',
-      chirldren: [
+      children: [
         {
           path: '',
           name: 'User',
           component: User,
+          meta: { requiresAuth: true },
         },
         {
           path: 'favorate',
           name: 'Favorate',
           component: Favorate,
+          meta: { requiresAuth: true },
         },
       ],
     },
