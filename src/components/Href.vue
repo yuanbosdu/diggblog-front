@@ -1,9 +1,11 @@
 <template>
   <v-layout row wrap>
     <v-flex xs10 offset-xs1>
-      hello world
+      <v-text-field placeholder='请输入网址...' required autofocus v-model='href'></v-text-field>
+      <v-text-field placeholder='博客简介' multi-line box textarea v-model='description'></v-text-field>
+      <v-btn color='success' outline block @click.prevent='digg'>DIGG</v-btn>
     </v-flex>
-    <v-router></v-router>
+    <router-view></router-view>
   </v-layout>
 </template>
 
@@ -12,9 +14,15 @@ export default {
   name: 'Href',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      href: '',
+      description: '',
     };
   },
+  methods: {
+    digg: function() {
+      console.log("digg click");
+    }
+  }
 };
 </script>
 

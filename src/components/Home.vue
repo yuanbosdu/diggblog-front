@@ -60,7 +60,7 @@ export default {
     const that = this;
     this.$http.get('/static/data/blog.json', { type: 'json' }).then((response) => {
       console.log(response.bodyText);
-      that.cards = eval(response.bodyText); // temp for test
+      that.cards = window.eval(response.bodyText); // temp for test
       console.log(that.cards);
     });
   },

@@ -47,9 +47,18 @@ export default {
       loading: false,
     };
   },
+  create: {
+    // console.log(JSON.stringfy(route));
+  },
   watch: {
     loading() {
       setTimeout(() => { this.loading = false; }, 3000);
+      if (this.name === 'test' && this.password === 'test') {
+        console.log('auth success');
+        console.log(this.$route.query.redirect);
+        this.$store.commit('setUserInfo', 'test');
+        this.$router.push({ path: this.$route.query.redirect });
+      }
     },
   },
 };

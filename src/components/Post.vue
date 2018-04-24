@@ -2,8 +2,6 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex xs12>
-        {{ msg }}
-        123
       </v-flex>
       <router-view></router-view>
     </v-layout>

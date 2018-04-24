@@ -48,5 +48,6 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     // output the console in development
     'no-console': 'off',
+    "no-eval": ["error", {"allowIndirect": true}] // default is false
   }
 }

@@ -21,12 +21,14 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    setUserInfo(state, user) {
-      state.userInfo = user;
+    setUserInfo(state, userName) {
+      console.log("set User Info");
+      state.userInfo.loginname = userName;
+      state.userInfo.userId = userName;
     },
   },
   actions: {
-    setUserInfo({ commit }, user) {
+    setUserInfo2({ commit }, user) {
       window.window.sessionStorage.user = JSON.stringfy(user);
       commit('setUserInfo, user');
     },
