@@ -19,10 +19,10 @@ export default {
     };
   },
   methods: {
-    digg: function() {
-      console.log("digg click");
-    }
-  }
+    digg: () => {
+      console.log('digg click');
+    },
+  },
 };
 </script>
 

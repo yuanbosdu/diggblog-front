@@ -22,7 +22,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setUserInfo(state, userName) {
-      console.log("set User Info");
+      console.log('set User Info');
       state.userInfo.loginname = userName;
       state.userInfo.userId = userName;
     },
